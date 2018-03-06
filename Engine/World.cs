@@ -42,6 +42,13 @@ namespace Engine
         public const int SPELL_ID_FROST = 2;
         public const int SPELL_ID_LIGHTNING = 3;
         public const int SPELL_ID_LIGHT = 4;
+        public const int SPELL_ID_DARK = 5;
+
+				public const int STATUS_ID_POISON = 1;
+				public const int STATUS_ID_PARALYZE = 2;
+				public const int STATUS_ID_BURN = 3;
+				public const int STATUS_ID_SLOW = 4;
+				public const int STATUS_ID_INTIMIDATE = 5;
 
         static World()
         {
@@ -182,7 +189,11 @@ namespace Engine
 
 				private static void PopulateSpells
 				{
-					Spell Fire = ;
+					Spells.Add(new Spell(SPELL_ID_FIRE, "Fire", 3, 7, 4, 1, 0));
+					Spells.Add(new Spell(SPELL_ID_FROST, "Frost", 3, 7, 4, 1, 0));
+					Spells.Add(new Spell(SPELL_ID_LIGHTNING, "Lightning", 6, 10, 7, 1, 0));
+					Spells.Add(new Spell(SPELL_ID_LIGHT, "Light", 2, 8, 3, 1, 0));
+					Spells.Add(new Spell(SPELL_ID_DARK, "Dark", 2, 8, 3, 1, 0));
 				}
 
         public static Item ItemByID(int id)
@@ -235,6 +246,19 @@ namespace Engine
             }
 
             return null;
+        }
+        
+        public static Spell SpellByID(int id)
+        {
+        		foreach (Spell spell in Spells)
+        		{
+        				if(spell.ID == id)
+        				{
+        						return spell;
+        				}
+        		}
+        				
+        		return null;
         }
     }
 }

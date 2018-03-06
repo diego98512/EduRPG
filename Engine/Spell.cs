@@ -14,9 +14,9 @@
 
         public int CastingExperience { get; set; }
 
-        public int Level { get; set; }
+        public int SpellLevel { get; set; }
 
-        public Spell(int id , string name , int minimumDamage , int maximumDamage , int manaCost , int castingExperience , int level)
+        public Spell(int id , string name , int minimumDamage , int maximumDamage , int manaCost , int castingExperience , int spellLevel)
         {
             ID = id;
             Name = name;
@@ -24,7 +24,7 @@
             MaximumDamage = maximumDamage;
             ManaCost = manaCost;
             CastingExperience = castingExperience;
-            Level = level;
+            SpellLevel = spellLevel;
         }
     }
 }
