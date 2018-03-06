@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Engine
 {
@@ -8,6 +8,7 @@ namespace Engine
         public static readonly List<Monster> Monsters = new List<Monster>();
         public static readonly List<Quest> Quests = new List<Quest>();
         public static readonly List<Location> Locations = new List<Location>();
+        public static readonly List<Spell> Spells = new List<Spell>();
 
         public const int ITEM_ID_RUSTY_SWORD = 1;
         public const int ITEM_ID_RAT_TAIL = 2;
@@ -36,6 +37,11 @@ namespace Engine
         public const int LOCATION_ID_FARM_FIELD = 7;
         public const int LOCATION_ID_BRIDGE = 8;
         public const int LOCATION_ID_SPIDER_FIELD = 9;
+        
+        public const int SPELL_ID_FIRE = 1;
+        public const int SPELL_ID_FROST = 2;
+        public const int SPELL_ID_LIGHTNING = 3;
+        public const int SPELL_ID_LIGHT = 4;
 
         static World()
         {
@@ -43,8 +49,10 @@ namespace Engine
             PopulateMonsters();
             PopulateQuests();
             PopulateLocations();
+            PopulateSpells();
         }
-
+				
+				#region PopulateItems
         private static void PopulateItems()
         {
             Items.Add(new Weapon(ITEM_ID_RUSTY_SWORD , "Rusty Sword" , "Rusty Swords" , 0 , 5));
@@ -58,6 +66,7 @@ namespace Engine
             Items.Add(new Item(ITEM_ID_SPIDER_SILK , "Spider Silk" , "Spider Silks"));
             Items.Add(new Item(ITEM_ID_ADVENTURER_PASS , "Adventurer Pass" , "Adventurer Passes"));
         }
+				#endregion PopulateItems
 
         private static void PopulateMonsters()
         {
@@ -170,6 +179,11 @@ namespace Engine
             Locations.Add(bridge);
             Locations.Add(spiderField);
         }
+
+				private static void PopulateSpells
+				{
+					Spell Fire = ;
+				}
 
         public static Item ItemByID(int id)
         {
