@@ -44,11 +44,12 @@ namespace Engine
         public const int SPELL_ID_LIGHT = 4;
         public const int SPELL_ID_DARK = 5;
 
-				public const int STATUS_ID_POISON = 1;
-				public const int STATUS_ID_PARALYZE = 2;
-				public const int STATUS_ID_BURN = 3;
-				public const int STATUS_ID_SLOW = 4;
-				public const int STATUS_ID_INTIMIDATE = 5;
+        public const int STATUS_ID_NULL = 0;
+		public const int STATUS_ID_POISON = 1;
+		public const int STATUS_ID_PARALYZE = 2;
+		public const int STATUS_ID_BURN = 3;
+		public const int STATUS_ID_SLOW = 4;
+		public const int STATUS_ID_INTIMIDATE = 5;
 
         static World()
         {
@@ -59,7 +60,7 @@ namespace Engine
             PopulateSpells();
         }
 				
-				#region PopulateItems
+		#region PopulateItems
         private static void PopulateItems()
         {
             Items.Add(new Weapon(ITEM_ID_RUSTY_SWORD , "Rusty Sword" , "Rusty Swords" , 0 , 5));
@@ -73,19 +74,20 @@ namespace Engine
             Items.Add(new Item(ITEM_ID_SPIDER_SILK , "Spider Silk" , "Spider Silks"));
             Items.Add(new Item(ITEM_ID_ADVENTURER_PASS , "Adventurer Pass" , "Adventurer Passes"));
         }
-				#endregion PopulateItems
+        #endregion PopulateItems
 
+        #region PopulateMonsters
         private static void PopulateMonsters()
         {
-            Monster rat = new Monster(MONSTER_ID_RAT , "Rat" , 5 , 3 , 10 , 3 , 3);
+            Monster rat = new Monster(MONSTER_ID_RAT , "Rat" , 5 , 3 , 10 , 3 , 3 , 0);
             rat.LootTable.Add(new LootItem(ItemByID(ITEM_ID_RAT_TAIL) , 75 , false));
             rat.LootTable.Add(new LootItem(ItemByID(ITEM_ID_PIECE_OF_FUR) , 75 , true));
 
-            Monster snake = new Monster(MONSTER_ID_SNAKE , "Snake" , 5 , 3 , 10 , 3 , 3);
+            Monster snake = new Monster(MONSTER_ID_SNAKE , "Snake" , 5 , 3 , 10 , 3 , 3 , 0);
             snake.LootTable.Add(new LootItem(ItemByID(ITEM_ID_SNAKE_FANG) , 75 , false));
             snake.LootTable.Add(new LootItem(ItemByID(ITEM_ID_SNAKESKIN) , 75 , true));
 
-            Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER , "Giant Spider" , 20 , 5 , 40 , 10 , 10);
+            Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER , "Giant Spider" , 20 , 5 , 40 , 10 , 10 , 0);
             giantSpider.LootTable.Add(new LootItem(ItemByID(ITEM_ID_SPIDER_FANG) , 75 , true));
             giantSpider.LootTable.Add(new LootItem(ItemByID(ITEM_ID_SPIDER_SILK) , 25 , false));
 
@@ -93,7 +95,9 @@ namespace Engine
             Monsters.Add(snake);
             Monsters.Add(giantSpider);
         }
+        #endregion PopulateMonsters
 
+        #region PopulateQuests
         private static void PopulateQuests()
         {
             Quest clearAlchemistsGarden = new Quest(QUEST_ID_CLEAR_ALCHEMISTS_GARDEN , "Clear the Alchemist's Garden." , "Kill rats in the Alchemist's Garden and bring back 3 Rat Tails. You will receive a healing potion and 10 gold pieces." , 20 , 10);
@@ -111,7 +115,9 @@ namespace Engine
             Quests.Add(clearAlchemistsGarden);
             Quests.Add(clearFarmersField);
         }
+        #endregion PopulateQuests
 
+        #region PopulateLocations
         private static void PopulateLocations()
         {
             //Create each location
@@ -186,15 +192,18 @@ namespace Engine
             Locations.Add(bridge);
             Locations.Add(spiderField);
         }
+        #endregion PopulateLocations
 
-				private static void PopulateSpells
-				{
-					Spells.Add(new Spell(SPELL_ID_FIRE, "Fire", 3, 7, 4, 1, 0));
-					Spells.Add(new Spell(SPELL_ID_FROST, "Frost", 3, 7, 4, 1, 0));
-					Spells.Add(new Spell(SPELL_ID_LIGHTNING, "Lightning", 6, 10, 7, 1, 0));
-					Spells.Add(new Spell(SPELL_ID_LIGHT, "Light", 2, 8, 3, 1, 0));
-					Spells.Add(new Spell(SPELL_ID_DARK, "Dark", 2, 8, 3, 1, 0));
-				}
+        #region PopulateSpells
+        private static void PopulateSpells()
+		{
+			Spells.Add(new Spell(SPELL_ID_FIRE, "Fire", 3, 7, 4, 1, 0));
+			Spells.Add(new Spell(SPELL_ID_FROST, "Frost", 3, 7, 4, 1, 0));
+			Spells.Add(new Spell(SPELL_ID_LIGHTNING, "Lightning", 6, 10, 7, 1, 0));
+			Spells.Add(new Spell(SPELL_ID_LIGHT, "Light", 2, 8, 3, 1, 0));
+			Spells.Add(new Spell(SPELL_ID_DARK, "Dark", 2, 8, 3, 1, 0));
+		}
+        #endregion PopulateSpells
 
         public static Item ItemByID(int id)
         {

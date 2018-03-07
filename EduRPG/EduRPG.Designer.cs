@@ -49,6 +49,8 @@
             this.rtbMessages = new System.Windows.Forms.RichTextBox();
             this.dgvInventory = new System.Windows.Forms.DataGridView();
             this.dgvQuests = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblMana = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuests)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +58,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 20);
+            this.label1.Location = new System.Drawing.Point(18, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 0;
@@ -65,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 46);
+            this.label2.Location = new System.Drawing.Point(18, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 1;
@@ -74,7 +76,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 74);
+            this.label3.Location = new System.Drawing.Point(18, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 13);
             this.label3.TabIndex = 2;
@@ -83,7 +85,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 100);
+            this.label4.Location = new System.Drawing.Point(18, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 3;
@@ -92,7 +94,7 @@
             // lblHitPoints
             // 
             this.lblHitPoints.AutoSize = true;
-            this.lblHitPoints.Location = new System.Drawing.Point(110, 19);
+            this.lblHitPoints.Location = new System.Drawing.Point(110, 8);
             this.lblHitPoints.Name = "lblHitPoints";
             this.lblHitPoints.Size = new System.Drawing.Size(0, 13);
             this.lblHitPoints.TabIndex = 4;
@@ -100,7 +102,7 @@
             // lblGold
             // 
             this.lblGold.AutoSize = true;
-            this.lblGold.Location = new System.Drawing.Point(110, 45);
+            this.lblGold.Location = new System.Drawing.Point(110, 21);
             this.lblGold.Name = "lblGold";
             this.lblGold.Size = new System.Drawing.Size(0, 13);
             this.lblGold.TabIndex = 5;
@@ -108,7 +110,7 @@
             // lblExperience
             // 
             this.lblExperience.AutoSize = true;
-            this.lblExperience.Location = new System.Drawing.Point(110, 73);
+            this.lblExperience.Location = new System.Drawing.Point(110, 34);
             this.lblExperience.Name = "lblExperience";
             this.lblExperience.Size = new System.Drawing.Size(0, 13);
             this.lblExperience.TabIndex = 6;
@@ -116,7 +118,7 @@
             // lblLevel
             // 
             this.lblLevel.AutoSize = true;
-            this.lblLevel.Location = new System.Drawing.Point(110, 99);
+            this.lblLevel.Location = new System.Drawing.Point(110, 47);
             this.lblLevel.Name = "lblLevel";
             this.lblLevel.Size = new System.Drawing.Size(0, 13);
             this.lblLevel.TabIndex = 7;
@@ -256,11 +258,30 @@
             this.dgvQuests.Size = new System.Drawing.Size(312, 189);
             this.dgvQuests.TabIndex = 20;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 61);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Mana: ";
+            // 
+            // lblMana
+            // 
+            this.lblMana.AutoSize = true;
+            this.lblMana.Location = new System.Drawing.Point(110, 61);
+            this.lblMana.Name = "lblMana";
+            this.lblMana.Size = new System.Drawing.Size(0, 13);
+            this.lblMana.TabIndex = 22;
+            // 
             // EduRPG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 652);
+            this.Controls.Add(this.lblMana);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvQuests);
             this.Controls.Add(this.dgvInventory);
             this.Controls.Add(this.rtbMessages);
@@ -314,6 +335,8 @@
         private System.Windows.Forms.RichTextBox rtbMessages;
         private System.Windows.Forms.DataGridView dgvInventory;
         private System.Windows.Forms.DataGridView dgvQuests;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblMana;
     }
 }
 
