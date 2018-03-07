@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EduRPG));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,6 +52,8 @@
             this.dgvQuests = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
             this.lblMana = new System.Windows.Forms.Label();
+            this.cboSpells = new System.Windows.Forms.ComboBox();
+            this.btnCastSpell = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuests)).BeginInit();
             this.SuspendLayout();
@@ -126,7 +129,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(617, 531);
+            this.label5.Location = new System.Drawing.Point(617, 497);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 8;
@@ -150,6 +153,7 @@
             // 
             // btnUseWeapon
             // 
+            this.btnUseWeapon.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
             this.btnUseWeapon.Location = new System.Drawing.Point(620, 559);
             this.btnUseWeapon.Name = "btnUseWeapon";
             this.btnUseWeapon.Size = new System.Drawing.Size(75, 23);
@@ -160,6 +164,7 @@
             // 
             // btnUsePotion
             // 
+            this.btnUsePotion.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
             this.btnUsePotion.Location = new System.Drawing.Point(620, 593);
             this.btnUsePotion.Name = "btnUsePotion";
             this.btnUsePotion.Size = new System.Drawing.Size(75, 23);
@@ -170,6 +175,7 @@
             // 
             // btnNorth
             // 
+            this.btnNorth.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
             this.btnNorth.Location = new System.Drawing.Point(493, 433);
             this.btnNorth.Name = "btnNorth";
             this.btnNorth.Size = new System.Drawing.Size(75, 23);
@@ -180,6 +186,7 @@
             // 
             // btnEast
             // 
+            this.btnEast.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
             this.btnEast.Location = new System.Drawing.Point(573, 457);
             this.btnEast.Name = "btnEast";
             this.btnEast.Size = new System.Drawing.Size(75, 23);
@@ -190,6 +197,7 @@
             // 
             // btnSouth
             // 
+            this.btnSouth.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
             this.btnSouth.Location = new System.Drawing.Point(493, 487);
             this.btnSouth.Name = "btnSouth";
             this.btnSouth.Size = new System.Drawing.Size(75, 23);
@@ -200,6 +208,7 @@
             // 
             // btnWest
             // 
+            this.btnWest.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
             this.btnWest.Location = new System.Drawing.Point(412, 457);
             this.btnWest.Name = "btnWest";
             this.btnWest.Size = new System.Drawing.Size(75, 23);
@@ -275,11 +284,31 @@
             this.lblMana.Size = new System.Drawing.Size(0, 13);
             this.lblMana.TabIndex = 22;
             // 
+            // cboSpells
+            // 
+            this.cboSpells.FormattingEnabled = true;
+            this.cboSpells.Location = new System.Drawing.Point(369, 525);
+            this.cboSpells.Name = "cboSpells";
+            this.cboSpells.Size = new System.Drawing.Size(121, 21);
+            this.cboSpells.TabIndex = 23;
+            // 
+            // btnCastSpell
+            // 
+            this.btnCastSpell.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCastSpell.Location = new System.Drawing.Point(620, 525);
+            this.btnCastSpell.Name = "btnCastSpell";
+            this.btnCastSpell.Size = new System.Drawing.Size(75, 23);
+            this.btnCastSpell.TabIndex = 24;
+            this.btnCastSpell.Text = "Cast";
+            this.btnCastSpell.UseVisualStyleBackColor = true;
+            // 
             // EduRPG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 652);
+            this.Controls.Add(this.btnCastSpell);
+            this.Controls.Add(this.cboSpells);
             this.Controls.Add(this.lblMana);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvQuests);
@@ -303,8 +332,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EduRPG";
-            this.Text = "EduRPG";
+            this.Text = "True Adventure";
+            this.Load += new System.EventHandler(this.EduRPG_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuests)).EndInit();
             this.ResumeLayout(false);
@@ -337,6 +368,8 @@
         private System.Windows.Forms.DataGridView dgvQuests;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblMana;
+        private System.Windows.Forms.ComboBox cboSpells;
+        private System.Windows.Forms.Button btnCastSpell;
     }
 }
 

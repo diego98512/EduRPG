@@ -8,7 +8,11 @@ namespace Engine
 
         public int StatusEffect { get; set; }
 
-        public LivingCreature(int currentHitPoints , int maximumHitPoints , int statusEffect)
+        public int CurrentMana { get; set; }
+
+        public int MaximumMana { get; set; }
+
+        public LivingCreature(int currentHitPoints , int maximumHitPoints , int currentMana , int maximumMana , int statusEffect)
         {
             CurrentHitPoints = currentHitPoints;
             MaximumHitPoints = maximumHitPoints;

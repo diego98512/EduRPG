@@ -19,12 +19,13 @@ namespace EduRPG
             //!_player = new Player(currentHitPoints: 10 , maximumHitPoints: 10 , level: 1 , experiencePoints: 0 , gold: 50);
             //We'll go with the top one just to match the tutorial's code scheme.
 
-            _player = new Player(10 , 10 , 50 , 0 , 1);
+            _player = new Player(currentHitPoints: 10 , maximumHitPoints: 10 , currentMana: 20 , maximumMana: 20 , gold: 50 , experiencePoints: 0 , level: 1 , statusEffect: 0);
 
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
             lblGold.Text = _player.Gold.ToString();
             lblExperience.Text = _player.ExperiencePoints.ToString();
             lblLevel.Text = _player.Level.ToString();
+            lblMana.Text = _player.CurrentMana.ToString();
         }
 
         private void btnNorth_Click(object sender , EventArgs e)
@@ -49,6 +50,11 @@ namespace EduRPG
 
         private void btnUsePotion_Click(object sender , EventArgs e)
         {
+        }
+
+        private void EduRPG_Load(object sender , EventArgs e)
+        {
+
         }
 
         ///This is just a test method for the "Test" button at the beginning.

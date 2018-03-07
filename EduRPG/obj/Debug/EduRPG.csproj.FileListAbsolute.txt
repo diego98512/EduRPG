@@ -10,3 +10,16 @@ C:\Users\Diego\source\repos\EduRPG\EduRPG\obj\Debug\EduRPG.exe
 C:\Users\Diego\source\repos\EduRPG\EduRPG\obj\Debug\EduRPG.pdb
 C:\Users\Diego\source\repos\EduRPG\EduRPG\obj\Debug\EduRPG.EduRPG.resources
 C:\Users\Diego\source\repos\EduRPG\EduRPG\obj\Debug\SuperAdventure.Properties.Resources.resources
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\obj\Debug\EduRPG.csprojResolveAssemblyReference.cache
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\obj\Debug\EduRPG.EduRPG.resources
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\obj\Debug\SuperAdventure.Properties.Resources.resources
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\obj\Debug\EduRPG.csproj.GenerateResource.cache
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\obj\Debug\EduRPG.csproj.CoreCompileInputs.cache
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\obj\Debug\EduRPG.exe
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\obj\Debug\EduRPG.pdb
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\bin\Debug\EduRPG.exe.config
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\bin\Debug\EduRPG.exe
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\bin\Debug\EduRPG.pdb
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\bin\Debug\Engine.dll
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\bin\Debug\Engine.pdb
+C:\Users\Diego\Documents\VS Projects\EduRPG\EduRPG\obj\Debug\EduRPG.csproj.CopyComplete
