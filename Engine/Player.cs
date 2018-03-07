@@ -14,7 +14,7 @@ namespace Engine
 
         public List<PlayerQuest> Quests { get; set; }
 
-        public Player(int currentHitPoints , int maximumHitPoints , int gold , int experiencePoints , int level,int statusEffect) : base(currentHitPoints , maximumHitPoints , statusEffect)
+        public Player(int currentHitPoints , int maximumHitPoints , int gold , int experiencePoints , int level , int statusEffect) : base(currentHitPoints , maximumHitPoints , statusEffect)
         {
             Gold = gold;
             ExperiencePoints = experiencePoints;
