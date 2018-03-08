@@ -2,13 +2,14 @@ using System.Collections.Generic;
 
 namespace Engine
 {
-    internal class World
+    public class World
     {
         public static readonly List<Item> Items = new List<Item>();
         public static readonly List<Monster> Monsters = new List<Monster>();
         public static readonly List<Quest> Quests = new List<Quest>();
         public static readonly List<Location> Locations = new List<Location>();
         public static readonly List<Spell> Spells = new List<Spell>();
+        public static readonly List<StatusEffect> StatusEffects = new List<StatusEffect>();
 
         public const int ITEM_ID_RUSTY_SWORD = 1;
         public const int ITEM_ID_RAT_TAIL = 2;
@@ -58,6 +59,7 @@ namespace Engine
             PopulateQuests();
             PopulateLocations();
             PopulateSpells();
+            PopulateStatusEffects();
         }
 
         #region PopulateItems
@@ -215,6 +217,20 @@ namespace Engine
 
         #endregion PopulateSpells
 
+        #region PopulateStatusEffects
+
+        private static void PopulateStatusEffects()
+        {
+            StatusEffects.Add(new StatusEffect(0 , "Null"));
+            StatusEffects.Add(new StatusEffect(1 , "Poison"));
+            StatusEffects.Add(new StatusEffect(2 , "Paralyze"));
+            StatusEffects.Add(new StatusEffect(3 , "Burn"));
+            StatusEffects.Add(new StatusEffect(4 , "Slow"));
+            StatusEffects.Add(new StatusEffect(5 , "Intimidate"));
+        }
+
+        #endregion PopulateStatusEffects
+
         public static Item ItemByID(int id)
         {
             foreach (Item item in Items)
@@ -274,6 +290,19 @@ namespace Engine
                 if (spell.ID == id)
                 {
                     return spell;
+                }
+            }
+
+            return null;
+        }
+
+        public static StatusEffect StatusEffectByID(int id)
+        {
+            foreach (StatusEffect statusEffect in StatusEffects)
+            {
+                if(statusEffect.ID == id)
+                {
+                    return statusEffect;
                 }
             }
 
