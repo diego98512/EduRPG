@@ -12,6 +12,8 @@ namespace Engine
 
         public List<InventoryItem> Inventory { get; set; }
 
+        public List<SpellBook> BigSpellBook { get; set; }
+
         public List<PlayerQuest> Quests { get; set; }
 
         public Location CurrentLocation { get; set; }
@@ -26,6 +28,7 @@ namespace Engine
 
             Inventory = new List<InventoryItem>();
             Quests = new List<PlayerQuest>();
+            BigSpellBook = new List<SpellBook>();
         }
     }
 }

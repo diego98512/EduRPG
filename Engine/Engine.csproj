@@ -55,6 +55,7 @@
     <Compile Include="QuestCompletionItem.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
     <Compile Include="Spell.cs" />
+    <Compile Include="SpellBook.cs" />
     <Compile Include="StatusEffect.cs" />
     <Compile Include="Weapon.cs" />
     <Compile Include="World.cs" />

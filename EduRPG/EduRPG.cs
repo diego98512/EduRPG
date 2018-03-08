@@ -23,6 +23,7 @@ namespace EduRPG
             _player = new Player(currentHitPoints: 10 , maximumHitPoints: 10 , currentMana: 20 , maximumMana: 20 , gold: 50 , experiencePoints: 0 , level: 1 , statusEffect: 0);
             MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
             _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD) , 1));
+            _player.BigSpellBook.Add(new SpellBook(World.SpellByID(World.SPELL_ID_FIRE) , 1));
 
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
             lblGold.Text = _player.Gold.ToString();
@@ -294,8 +295,10 @@ namespace EduRPG
 
                 cboWeapons.Visible = true;
                 cboPotions.Visible = true;
+                cboSpells.Visible = true;
                 btnUseWeapon.Visible = true;
                 btnUsePotion.Visible = true;
+                btnCastSpell.Visible = true;
             }
             else
             {
@@ -303,8 +306,10 @@ namespace EduRPG
 
                 cboWeapons.Visible = false;
                 cboPotions.Visible = false;
+                cboSpells.Visible = false;
                 btnUseWeapon.Visible = false;
                 btnUsePotion.Visible = false;
+                btnCastSpell.Visible = false;
             }
 
             // Refresh player's inventory list
@@ -399,6 +404,36 @@ playerQuest.IsCompleted.ToString() });
 
                 cboPotions.SelectedIndex = 0;
             }
+
+            //Refresh player's spells combobox.
+            List<Spell> spells = new List<Spell>();
+
+            foreach (SpellBook spellBook in _player.BigSpellBook)
+            {
+                if (spellBook.Details is Spell)
+                {
+                    if (spellBook.Quantity > 0)
+                    {
+                        spells.Add((Spell)spellBook.Details);
+                    }
+                }
+            }
+
+            if (spells.Count == 0)
+            {
+                // The player doesn't have any potions, so hide the potion combobox and the "Use" button
+                cboSpells.Visible = false;
+                btnCastSpell.Visible = false;
+            }
+            else
+            {
+                cboSpells.DataSource = spells;
+                cboSpells.DisplayMember = "Name";
+                cboSpells.ValueMember = "ID";
+
+                cboSpells.SelectedIndex = 0;
+            }
+
         }
 
         private void btnUseWeapon_Click(object sender , EventArgs e)
