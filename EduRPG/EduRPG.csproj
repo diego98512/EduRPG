@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="avatar_IuM_icon.ico" />
+    <None Include="Resources\plaster.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

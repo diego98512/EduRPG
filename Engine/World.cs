@@ -72,7 +72,7 @@ namespace Engine
             Items.Add(new Item(ITEM_ID_SNAKE_FANG , "Snake Fang" , "Snake Fangs"));
             Items.Add(new Item(ITEM_ID_SNAKESKIN , "Snakeskin" , "Snakeskins"));
             Items.Add(new Weapon(ITEM_ID_CLUB , "Club" , "Clubs" , 3 , 10));
-            Items.Add(new HealingPotion(ITEM_ID_HEALING_POTION , "Healing Potion" , "Healing Potions" , 5));
+            Items.Add(new HealingPotion(ITEM_ID_HEALING_POTION , "Healing Potion" , "Healing Potions" , 10));
             Items.Add(new Item(ITEM_ID_SPIDER_FANG , "Spider Fang" , "Spider Fangs"));
             Items.Add(new Item(ITEM_ID_SPIDER_SILK , "Spider Silk" , "Spider Silks"));
             Items.Add(new Item(ITEM_ID_ADVENTURER_PASS , "Adventurer Pass" , "Adventurer Passes"));
@@ -208,7 +208,7 @@ namespace Engine
 
         private static void PopulateSpells()
         {
-            Spells.Add(new Spell(SPELL_ID_FIRE , "Fire" , 3 , 7 , 4 , 1 , 0));
+            Spells.Add(new Spell(SPELL_ID_FIRE , "Fire" , 1 , 5 , 6 , 1 , 0));
             Spells.Add(new Spell(SPELL_ID_FROST , "Frost" , 3 , 7 , 4 , 1 , 0));
             Spells.Add(new Spell(SPELL_ID_LIGHTNING , "Lightning" , 6 , 10 , 7 , 1 , 0));
             Spells.Add(new Spell(SPELL_ID_LIGHT , "Light" , 2 , 8 , 3 , 1 , 0));

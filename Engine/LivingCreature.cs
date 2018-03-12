@@ -16,6 +16,8 @@ namespace Engine
         {
             CurrentHitPoints = currentHitPoints;
             MaximumHitPoints = maximumHitPoints;
+            CurrentMana = currentMana;
+            MaximumMana = maximumMana;
             StatusEffect = statusEffect;
         }
     }

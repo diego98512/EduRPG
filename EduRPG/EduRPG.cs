@@ -2,34 +2,38 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 namespace EduRPG
 {
     public partial class EduRPG : Form
     {
+
+        //TODO Implement custom actions
+        //TODO Implement spell casting (w/ mana consumption, spell leveling, etc.)
+        //TODO Implement shops (weapon shops, general item shops, spell shops)
+        //TODO Implement more monsters
+        //TODO Add more locations and quests
+        //TODO Add visuals?
+
         private Player _player;
         private Monster _currentMonster;
+        private const string PLAYER_DATA_FILE_NAME = "PlayerData.xml";
 
         public EduRPG()
         {
             InitializeComponent();
-
-            //Location location = new Location(1 , "Home" , "This is your house");
-            // Here are a couple different ways to set the _player's values.
-            //!_player = new Player(10 , 10 , 50 , 0 , 1);
-            //!_player = new Player(currentHitPoints: 10 , maximumHitPoints: 10 , level: 1 , experiencePoints: 0 , gold: 50);
-            //We'll go with the top one just to match the tutorial's code scheme.
-
-            _player = new Player( currentHitPoints: 10 , maximumHitPoints: 10 , currentMana: 20 , maximumMana: 20 , gold: 50 , experiencePoints: 0 , level: 1 , statusEffect: 0 );
-            MoveTo( World.LocationByID( World.LOCATION_ID_HOME ) );
-            _player.Inventory.Add( new InventoryItem( World.ItemByID( World.ITEM_ID_RUSTY_SWORD ) , 1 ) );
-            _player.BigSpellBook.Add( new SpellBook( World.SpellByID( World.SPELL_ID_FIRE ) , 1 ) );
-
-            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-            lblGold.Text = _player.Gold.ToString();
-            lblExperience.Text = _player.ExperiencePoints.ToString();
-            lblLevel.Text = _player.Level.ToString();
-            lblMana.Text = _player.CurrentMana.ToString();
+            if ( File.Exists( PLAYER_DATA_FILE_NAME ) )
+            {
+                _player = Player.CreatePlayerFromXmlString(
+                File.ReadAllText( PLAYER_DATA_FILE_NAME ) );
+            }
+            else
+            {
+                _player = Player.CreateDefaultPlayer();
+            }
+            MoveTo( _player.CurrentLocation );
+            UpdatePlayerStats();
         }
 
         private void btnNorth_Click( object sender , EventArgs e )
@@ -58,6 +62,7 @@ namespace EduRPG
             if ( !_player.HasRequiredItemToEnterThisLocation( newLocation ) )
             {
                 rtbMessages.Text += "You must have a " + newLocation.ItemRequiredToEnter.Name + " to enter this location." + Environment.NewLine;
+                ScrollToBottomOfMessages();
                 return;
             }
 
@@ -77,8 +82,14 @@ namespace EduRPG
             //Completely heal the player.
             _player.CurrentHitPoints = _player.MaximumHitPoints;
 
+            //Restore player's mana
+            _player.CurrentMana = _player.MaximumMana;
+
             //Update hit points in UI.
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
+
+            //Update mana in UI
+            lblMana.Text = _player.CurrentMana.ToString();
 
             //Does the location have a quest?
             if ( newLocation.QuestAvailableHere != null )
@@ -115,12 +126,14 @@ namespace EduRPG
                             //Display message.
                             rtbMessages.Text += Environment.NewLine;
                             rtbMessages.Text += "You have completed the " + newLocation.QuestAvailableHere.Name + " quest." + Environment.NewLine;
+                            ScrollToBottomOfMessages();
 
                             // Remove quest items from inventory
                             _player.RemoveQuestCompletionItems( newLocation.QuestAvailableHere );
 
                             //Give quest rewards.
                             rtbMessages.Text += "You've received " + Environment.NewLine;
+                            ScrollToBottomOfMessages();
                             rtbMessages.Text +=
                            newLocation.QuestAvailableHere.RewardExperiencePoints.ToString() +
                            " experience points and " + Environment.NewLine;
@@ -130,6 +143,7 @@ namespace EduRPG
                             rtbMessages.Text +=
                            newLocation.QuestAvailableHere.RewardItem.Name +
                            Environment.NewLine;
+                            ScrollToBottomOfMessages();
                             rtbMessages.Text += Environment.NewLine;
 
                             _player.ExperiencePoints +=
@@ -152,10 +166,13 @@ namespace EduRPG
                     rtbMessages.Text += "You've received the " +
                    newLocation.QuestAvailableHere.Name +
                    " quest." + Environment.NewLine;
+                    ScrollToBottomOfMessages();
                     rtbMessages.Text += newLocation.QuestAvailableHere.Description +
                    Environment.NewLine;
+                    ScrollToBottomOfMessages();
                     rtbMessages.Text += "To complete it, return with:" +
                    Environment.NewLine;
+                    ScrollToBottomOfMessages();
                     foreach ( QuestCompletionItem qci in
                    newLocation.QuestAvailableHere.QuestCompletionItems )
                     {
@@ -171,6 +188,7 @@ namespace EduRPG
                         }
                     }
                     rtbMessages.Text += Environment.NewLine;
+                    ScrollToBottomOfMessages();
 
                     // Add the quest to the player's quest list
                     _player.Quests.Add( new PlayerQuest( newLocation.QuestAvailableHere ) );
@@ -182,6 +200,7 @@ namespace EduRPG
             {
                 rtbMessages.Text += "You see a " + newLocation.MonsterLivingHere.Name +
                Environment.NewLine;
+                ScrollToBottomOfMessages();
 
                 // Make a new monster, using the values from the standard monster in the World.Monster list
                 Monster standardMonster = World.MonsterByID(
@@ -215,6 +234,9 @@ namespace EduRPG
                 btnUsePotion.Visible = false;
                 btnCastSpell.Visible = false;
             }
+
+            //Refresh player's stats
+            UpdatePlayerStats();
 
             //Refresh player's inventory list
             UpdateInventoryListInUI();
@@ -334,7 +356,7 @@ namespace EduRPG
         {
             List<Spell> spells = new List<Spell>();
 
-            foreach ( SpellBook spellBook in _player.BigSpellBook )
+            foreach ( SpellBook spellBook in _player.Spells )
             {
                 if ( spellBook.Details is Spell )
                 {
@@ -361,6 +383,29 @@ namespace EduRPG
             }
         }
 
+        private void btnCastSpell_Click( object sender , EventArgs e )
+        {
+            //Get the currently selected spell from the cboSpells ComboBox
+            Spell currentSpell = (Spell)cboSpells.SelectedItem;
+
+            //Subtract mana cost of spell from player's current mana
+            _player.CurrentMana -= currentSpell.ManaCost;
+
+            //Determine the amount of damage to do to the monster
+            int damageToMonster = RandomNumberGenerator.NumberBetween( currentSpell.MinimumDamage , currentSpell.MaximumDamage );
+
+            //Apply the damage to the monster
+            _currentMonster.CurrentHitPoints -= damageToMonster;
+
+            //Display message
+            rtbMessages.Text += "You cast " + currentSpell.Name + " for " + damageToMonster.ToString() + " points of damage to " + _currentMonster.Name + Environment.NewLine;
+
+            //Reward the player casting experience
+            currentSpell.CastingExperience += 5;
+
+            MonsterAfterAttack();
+        }
+
         private void btnUseWeapon_Click( object sender , EventArgs e )
         {
             //Get the currently selected weapon from the cboWeapons ComboBox
@@ -373,106 +418,10 @@ namespace EduRPG
             _currentMonster.CurrentHitPoints -= damageToMonster;
 
             //Display message
-            rtbMessages.Text += "You deal " + damageToMonster.ToString() + " points of damage to the " + _currentMonster.Name + Environment.NewLine; 
+            rtbMessages.Text += "You deal " + damageToMonster.ToString() + " points of damage to " + _currentMonster.Name + Environment.NewLine;
+            ScrollToBottomOfMessages();
 
-            //Check if the monster is dead
-            if(_currentMonster.CurrentHitPoints <= 0 )
-            {
-                //Monster is dead
-                rtbMessages.Text += Environment.NewLine;
-                rtbMessages.Text += "You have slain the " + _currentMonster.Name + Environment.NewLine;
-
-                //Give the player experience points for their victory
-                _player.ExperiencePoints += _currentMonster.RewardExperiencePoints;
-                rtbMessages.Text += "You earned " + _currentMonster.RewardExperiencePoints.ToString() + " experience points. Nice!" + Environment.NewLine;
-
-                //Give the player gold for their victory
-                _player.Gold += _currentMonster.RewardGold;
-                rtbMessages.Text += "You looted the " + _currentMonster.Name + "'s corpse and found " + _currentMonster.RewardGold.ToString() + " gold. Who cares if you get your hands a little dirty? Gold is gold..." + Environment.NewLine;
-
-                //Get random loot items from the monster
-                List<InventoryItem> lootedItems = new List<InventoryItem>();
-
-                //Add items to the lootedItms list, comparing a random number to the drop percentage
-                foreach (LootItem lootItem in _currentMonster.LootTable )
-                {
-                    if(RandomNumberGenerator.NumberBetween(1, 100) <= lootItem.DropPercentage )
-                    {
-                        lootedItems.Add( new InventoryItem( lootItem.Details , 1 ) );
-                    }
-                }
-
-                //If no items were randomly selected, then add the default loot item(s)
-                if(lootedItems.Count == 0 )
-                {
-                    foreach(LootItem lootItem in _currentMonster.LootTable )
-                    {
-                        if ( lootItem.IsDefaultItem )
-                        {
-                            lootedItems.Add( new InventoryItem( lootItem.Details , 1 ) );
-                        }
-                    }
-                }
-
-                //Add the looted items to the player's inventory
-                foreach(InventoryItem inventoryItem in lootedItems )
-                {
-                    _player.AddItemToInventory( inventoryItem.Details );
-
-                    if(inventoryItem.Quantity == 1 )
-                    {
-                        rtbMessages.Text += "You also looted " + inventoryItem.Quantity.ToString() + " " + inventoryItem.Details.Name + Environment.NewLine;
-                    }
-
-                    else
-                    {
-                        rtbMessages.Text += "You also looted " + inventoryItem.Quantity.ToString() + " " + inventoryItem.Details.NamePlural + Environment.NewLine;
-                    }
-                }
-
-                //Refresh player information and inventory controls
-                lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-                lblGold.Text = _player.Gold.ToString();
-                lblExperience.Text = _player.ExperiencePoints.ToString();
-                lblLevel.Text = _player.Level.ToString();
-
-                UpdateInventoryListInUI();
-                UpdatePotionListInUI();
-                UpdateWeaponListInUI();
-                UpdateSpellsListInUI();
-
-                //Add a blank line to the messages box, just for appearance
-                rtbMessages.Text += Environment.NewLine;
-
-                //Move the player to current location (to heal player and create a new monster to fight)
-                MoveTo( _player.CurrentLocation );
-            }
-
-            else
-            {
-                //Monster is still alive
-
-                //Determine the amount of damage the monster does to the player
-                int damageToPlayer = RandomNumberGenerator.NumberBetween( 0 , _currentMonster.MaximumDamage );
-
-                //Display message
-                rtbMessages.Text += "The " + _currentMonster.Name + " dealt " + damageToPlayer.ToString() + " points of damage to you. " + Environment.NewLine;
-
-                //Subtract damage from player
-                _player.CurrentHitPoints -= damageToPlayer;
-
-                //Refresh player data in UI
-                lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-
-                if(_player.CurrentHitPoints <= 0 )
-                {
-                    //Display message
-                    rtbMessages.Text += "The " + _currentMonster.Name + " has killed you..." + Environment.NewLine;
-
-                    //Move player to "Home"
-                    MoveTo( World.LocationByID( World.LOCATION_ID_HOME ) );
-                }
-            }
+            MonsterAfterAttack();
         }
 
         private void btnUsePotion_Click( object sender , EventArgs e )
@@ -500,7 +449,8 @@ namespace EduRPG
             }
 
             //Display message
-            rtbMessages.Text += "You drink a " + potion.Name + Environment.NewLine;
+            rtbMessages.Text += "You drink a " + potion.Name + " and heal yourself for " + potion.AmountToHeal.ToString() + " hit points." + Environment.NewLine;
+            ScrollToBottomOfMessages();
 
             //Monster gets their turn to attack
 
@@ -509,6 +459,7 @@ namespace EduRPG
 
             //Display message
             rtbMessages.Text += "The " + _currentMonster.Name + " dealt " + damageToPlayer.ToString() + " points of damage." + Environment.NewLine;
+            ScrollToBottomOfMessages();
 
             //Subtract damage from player
             _player.CurrentHitPoints -= damageToPlayer;
@@ -517,19 +468,147 @@ namespace EduRPG
             {
                 //We died
                 rtbMessages.Text += "The " + _currentMonster.Name + "killed you." + Environment.NewLine;
+                ScrollToBottomOfMessages();
 
                 //Send home
                 MoveTo( World.LocationByID( World.LOCATION_ID_HOME ) );
             }
 
             //Refresh player data in UI
-            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
+            UpdatePlayerStats();
             UpdateInventoryListInUI();
             UpdatePotionListInUI();
         }
 
+        private void ScrollToBottomOfMessages()
+        {
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
+        }
+
+        private void UpdatePlayerStats()
+        {
+            //Refresh player information and inventory controls
+            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
+            lblGold.Text = _player.Gold.ToString();
+            lblExperience.Text = _player.ExperiencePoints.ToString();
+            lblLevel.Text = _player.Level.ToString();
+            lblMana.Text = _player.CurrentMana.ToString();
+        }
+
+        private void MonsterAfterAttack()
+        {
+            //Check if the monster is dead
+            if ( _currentMonster.CurrentHitPoints <= 0 )
+            {
+                //Monster is dead
+                rtbMessages.Text += Environment.NewLine;
+                rtbMessages.Text += "You have slain " + _currentMonster.Name + Environment.NewLine;
+                ScrollToBottomOfMessages();
+
+                //Give the player experience points for their victory
+                _player.ExperiencePoints += _currentMonster.RewardExperiencePoints;
+                rtbMessages.Text += "You earned " + _currentMonster.RewardExperiencePoints.ToString() + " experience points. Nice!" + Environment.NewLine;
+                ScrollToBottomOfMessages();
+
+                //Give the player gold for their victory
+                _player.Gold += _currentMonster.RewardGold;
+                rtbMessages.Text += "You looted the " + _currentMonster.Name + "'s corpse and found " + _currentMonster.RewardGold.ToString() + " gold. Who cares if you get your hands a little dirty? Gold is gold..." + Environment.NewLine;
+                ScrollToBottomOfMessages();
+
+                //Get random loot items from the monster
+                List<InventoryItem> lootedItems = new List<InventoryItem>();
+
+                //Add items to the lootedItms list, comparing a random number to the drop percentage
+                foreach ( LootItem lootItem in _currentMonster.LootTable )
+                {
+                    if ( RandomNumberGenerator.NumberBetween( 1 , 100 ) <= lootItem.DropPercentage )
+                    {
+                        lootedItems.Add( new InventoryItem( lootItem.Details , 1 ) );
+                    }
+                }
+
+                //If no items were randomly selected, then add the default loot item(s)
+                if ( lootedItems.Count == 0 )
+                {
+                    foreach ( LootItem lootItem in _currentMonster.LootTable )
+                    {
+                        if ( lootItem.IsDefaultItem )
+                        {
+                            lootedItems.Add( new InventoryItem( lootItem.Details , 1 ) );
+                        }
+                    }
+                }
+
+                //Add the looted items to the player's inventory
+                foreach ( InventoryItem inventoryItem in lootedItems )
+                {
+                    _player.AddItemToInventory( inventoryItem.Details );
+
+                    if ( inventoryItem.Quantity == 1 )
+                    {
+                        rtbMessages.Text += "You also looted " + inventoryItem.Quantity.ToString() + " " + inventoryItem.Details.Name + Environment.NewLine;
+                        ScrollToBottomOfMessages();
+                    }
+
+                    else
+                    {
+                        rtbMessages.Text += "You also looted " + inventoryItem.Quantity.ToString() + " " + inventoryItem.Details.NamePlural + Environment.NewLine;
+                        ScrollToBottomOfMessages();
+                    }
+                }
+
+                //Refresh player information and inventory controls
+                UpdatePlayerStats();
+
+                UpdateInventoryListInUI();
+                UpdatePotionListInUI();
+                UpdateWeaponListInUI();
+                UpdateSpellsListInUI();
+
+                //Add a blank line to the messages box, just for appearance
+                rtbMessages.Text += Environment.NewLine;
+
+                //Move the player to current location (to heal player and create a new monster to fight)
+                MoveTo( _player.CurrentLocation );
+            }
+
+            else
+            {
+                //Monster is still alive
+
+                //Determine the amount of damage the monster does to the player
+                int damageToPlayer = RandomNumberGenerator.NumberBetween( 0 , _currentMonster.MaximumDamage );
+
+                //Display message
+                rtbMessages.Text += _currentMonster.Name + " dealt " + damageToPlayer.ToString() + " points of damage to you. " + Environment.NewLine;
+                ScrollToBottomOfMessages();
+
+                //Subtract damage from player
+                _player.CurrentHitPoints -= damageToPlayer;
+
+                //Refresh player data in UI
+                UpdatePlayerStats();
+
+                if ( _player.CurrentHitPoints <= 0 )
+                {
+                    //Display message
+                    rtbMessages.Text += "The " + _currentMonster.Name + " has killed you..." + Environment.NewLine;
+                    ScrollToBottomOfMessages();
+
+                    //Move player to "Home"
+                    MoveTo( World.LocationByID( World.LOCATION_ID_HOME ) );
+                }
+            }
+        }
+
         private void EduRPG_Load( object sender , EventArgs e )
         {
+        }
+
+        private void EduRPG_FormClosing( object sender , FormClosingEventArgs e )
+        {
+            File.WriteAllText( PLAYER_DATA_FILE_NAME , _player.ToXMLString() );
         }
     }
 }

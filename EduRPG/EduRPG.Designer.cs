@@ -61,77 +61,86 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 9);
+            this.label1.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(77, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Hit Points:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 22);
+            this.label2.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(13, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.Size = new System.Drawing.Size(43, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Gold:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 35);
+            this.label3.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(13, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.Size = new System.Drawing.Size(84, 17);
             this.label3.TabIndex = 2;
             this.label3.Text = "Experience: ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 48);
+            this.label4.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(156, 75);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.Size = new System.Drawing.Size(48, 17);
             this.label4.TabIndex = 3;
             this.label4.Text = "Level: ";
             // 
             // lblHitPoints
             // 
             this.lblHitPoints.AutoSize = true;
-            this.lblHitPoints.Location = new System.Drawing.Point(110, 8);
+            this.lblHitPoints.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHitPoints.Location = new System.Drawing.Point(105, 9);
             this.lblHitPoints.Name = "lblHitPoints";
-            this.lblHitPoints.Size = new System.Drawing.Size(0, 13);
+            this.lblHitPoints.Size = new System.Drawing.Size(0, 17);
             this.lblHitPoints.TabIndex = 4;
             // 
             // lblGold
             // 
             this.lblGold.AutoSize = true;
-            this.lblGold.Location = new System.Drawing.Point(110, 21);
+            this.lblGold.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGold.Location = new System.Drawing.Point(105, 42);
             this.lblGold.Name = "lblGold";
-            this.lblGold.Size = new System.Drawing.Size(0, 13);
+            this.lblGold.Size = new System.Drawing.Size(0, 17);
             this.lblGold.TabIndex = 5;
             // 
             // lblExperience
             // 
             this.lblExperience.AutoSize = true;
-            this.lblExperience.Location = new System.Drawing.Point(110, 34);
+            this.lblExperience.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExperience.Location = new System.Drawing.Point(105, 75);
             this.lblExperience.Name = "lblExperience";
-            this.lblExperience.Size = new System.Drawing.Size(0, 13);
+            this.lblExperience.Size = new System.Drawing.Size(0, 17);
             this.lblExperience.TabIndex = 6;
             // 
             // lblLevel
             // 
             this.lblLevel.AutoSize = true;
-            this.lblLevel.Location = new System.Drawing.Point(110, 47);
+            this.lblLevel.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLevel.Location = new System.Drawing.Point(248, 75);
             this.lblLevel.Name = "lblLevel";
-            this.lblLevel.Size = new System.Drawing.Size(0, 13);
+            this.lblLevel.Size = new System.Drawing.Size(0, 17);
             this.lblLevel.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(617, 497);
+            this.label5.Font = new System.Drawing.Font("Tempus Sans ITC", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(603, 491);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.Size = new System.Drawing.Size(92, 19);
             this.label5.TabIndex = 8;
             this.label5.Text = "Select Action";
             // 
@@ -153,6 +162,7 @@
             // 
             // btnUseWeapon
             // 
+            this.btnUseWeapon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUseWeapon.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
             this.btnUseWeapon.Location = new System.Drawing.Point(620, 559);
             this.btnUseWeapon.Name = "btnUseWeapon";
@@ -164,6 +174,7 @@
             // 
             // btnUsePotion
             // 
+            this.btnUsePotion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUsePotion.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
             this.btnUsePotion.Location = new System.Drawing.Point(620, 593);
             this.btnUsePotion.Name = "btnUsePotion";
@@ -175,7 +186,10 @@
             // 
             // btnNorth
             // 
-            this.btnNorth.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
+            this.btnNorth.Cursor = System.Windows.Forms.Cursors.PanNorth;
+            this.btnNorth.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnNorth.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.btnNorth.Image = global::SuperAdventure.Properties.Resources.plaster;
             this.btnNorth.Location = new System.Drawing.Point(493, 433);
             this.btnNorth.Name = "btnNorth";
             this.btnNorth.Size = new System.Drawing.Size(75, 23);
@@ -186,7 +200,10 @@
             // 
             // btnEast
             // 
-            this.btnEast.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
+            this.btnEast.Cursor = System.Windows.Forms.Cursors.PanEast;
+            this.btnEast.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnEast.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.btnEast.Image = ((System.Drawing.Image)(resources.GetObject("btnEast.Image")));
             this.btnEast.Location = new System.Drawing.Point(573, 457);
             this.btnEast.Name = "btnEast";
             this.btnEast.Size = new System.Drawing.Size(75, 23);
@@ -197,7 +214,10 @@
             // 
             // btnSouth
             // 
-            this.btnSouth.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
+            this.btnSouth.Cursor = System.Windows.Forms.Cursors.PanSouth;
+            this.btnSouth.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnSouth.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.btnSouth.Image = global::SuperAdventure.Properties.Resources.plaster;
             this.btnSouth.Location = new System.Drawing.Point(493, 487);
             this.btnSouth.Name = "btnSouth";
             this.btnSouth.Size = new System.Drawing.Size(75, 23);
@@ -208,7 +228,10 @@
             // 
             // btnWest
             // 
-            this.btnWest.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F);
+            this.btnWest.Cursor = System.Windows.Forms.Cursors.PanWest;
+            this.btnWest.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnWest.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.btnWest.Image = global::SuperAdventure.Properties.Resources.plaster;
             this.btnWest.Location = new System.Drawing.Point(412, 457);
             this.btnWest.Name = "btnWest";
             this.btnWest.Size = new System.Drawing.Size(75, 23);
@@ -219,6 +242,9 @@
             // 
             // rtbLocation
             // 
+            this.rtbLocation.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.rtbLocation.Font = new System.Drawing.Font("Tempus Sans ITC", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbLocation.ForeColor = System.Drawing.SystemColors.Info;
             this.rtbLocation.Location = new System.Drawing.Point(347, 19);
             this.rtbLocation.Name = "rtbLocation";
             this.rtbLocation.ReadOnly = true;
@@ -228,6 +254,9 @@
             // 
             // rtbMessages
             // 
+            this.rtbMessages.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.rtbMessages.Font = new System.Drawing.Font("Tempus Sans ITC", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbMessages.ForeColor = System.Drawing.SystemColors.Info;
             this.rtbMessages.Location = new System.Drawing.Point(347, 130);
             this.rtbMessages.Name = "rtbMessages";
             this.rtbMessages.ReadOnly = true;
@@ -270,18 +299,20 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 61);
+            this.label6.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(156, 9);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.Size = new System.Drawing.Size(51, 17);
             this.label6.TabIndex = 21;
             this.label6.Text = "Mana: ";
             // 
             // lblMana
             // 
             this.lblMana.AutoSize = true;
-            this.lblMana.Location = new System.Drawing.Point(110, 61);
+            this.lblMana.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMana.Location = new System.Drawing.Point(248, 9);
             this.lblMana.Name = "lblMana";
-            this.lblMana.Size = new System.Drawing.Size(0, 13);
+            this.lblMana.Size = new System.Drawing.Size(0, 17);
             this.lblMana.TabIndex = 22;
             // 
             // cboSpells
@@ -294,6 +325,7 @@
             // 
             // btnCastSpell
             // 
+            this.btnCastSpell.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCastSpell.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCastSpell.Location = new System.Drawing.Point(620, 525);
             this.btnCastSpell.Name = "btnCastSpell";
@@ -301,6 +333,7 @@
             this.btnCastSpell.TabIndex = 24;
             this.btnCastSpell.Text = "Cast";
             this.btnCastSpell.UseVisualStyleBackColor = true;
+            this.btnCastSpell.Click += new System.EventHandler(this.btnCastSpell_Click);
             // 
             // EduRPG
             // 
@@ -335,6 +368,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EduRPG";
             this.Text = "True Adventure";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EduRPG_FormClosing);
             this.Load += new System.EventHandler(this.EduRPG_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuests)).EndInit();
